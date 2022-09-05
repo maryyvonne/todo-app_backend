@@ -6,7 +6,7 @@ const NoteSchema = new mongoose.Schema({
   description: { type: String, required: false },
   status: { type: String, required: true },
   project: [{ type: Schema.ObjectId, ref: "Project" }],
-  notes: [{ type: Schema.ObjectId, ref: "Notes" }],
+  notes: [{ type: Schema.ObjectId, ref: "Note" }],
   todos: [{ type: Schema.ObjectId, ref: "Todos" }],
   createdDate: { type: Date, required: true },
 });

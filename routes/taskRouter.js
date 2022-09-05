@@ -9,7 +9,7 @@ const TaskRouter = express.Router();
 
 TaskRouter
   // Create
-  .post("/", createTask)
+  .post("/add", createTask)
   // Read
   .get("/", getTasks)
   // Update

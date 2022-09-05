@@ -51,6 +51,19 @@ export const getProjects = async (req, res, next) => {
     next(err);
   }
 };
+export const getByUser = async (req, res, next) => {
+  const users = req.query.users.split(",");
+  try {
+    const list = await Promise.all(
+      users.map((user) => {
+        return Project.countDocuments({ user: user });
+      })
+    );
+    res.status(200).json(list);
+  } catch (err) {
+    next(err);
+  }
+};
 export const countByCity = async (req, res, next) => {
   const cities = req.query.cities.split(",");
   try {

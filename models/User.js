@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
+const ObjectId = mongoose.Types.ObjectId;
 
 const UserSchema = new mongoose.Schema(
   {
+    userId: { ObjectId },
     firstName: { type: String, required: false },
     lastName: { type: String, required: false },
     email: { type: String, required: false },
@@ -25,7 +27,7 @@ const UserSchema = new mongoose.Schema(
     notes: [{ type: Schema.ObjectId, ref: "Note" }],
     todos: [{ type: Schema.ObjectId, ref: "Todo" }],
     projects: [{ type: Schema.ObjectId, ref: "Project" }],
-    isAdmin: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: false }
   },
   { timestamps: true }
 );

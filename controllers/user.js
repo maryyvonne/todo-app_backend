@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Task from "../models/Task.js";
+import Project from '../models/Project.js';
 
 export const createUser = async (req, res, next) => {
   const newUser = new User(req.body);
@@ -33,7 +34,7 @@ export const deleteUser = async (req, res, next) => {
 };
 export const getUser = async (req, res, next) => {
   try {
-    const User = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
     res.status(200).json(User);
   } catch (err) {
     next(err);
@@ -55,10 +56,23 @@ export const getUsers = async (req, res, next) => {
 
 export const getUserTasks = async (req, res, next) => {
   try {
-    const User = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
     const list = await Promise.all(
-      User.tasks.map((task) => {
+      user.tasks.map((task) => {
         return Task.findById(task);
+      })
+    );
+    res.status(200).json(list);
+  } catch (err) {
+    next(err);
+  }
+};
+export const getUserProjects = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const list = await Promise.all(
+      user.projects.map((project) => {
+        return Project.findById(project);
       })
     );
     res.status(200).json(list);
